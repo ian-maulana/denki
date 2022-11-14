@@ -1,10 +1,15 @@
 const express = require('express');
 const env = require('dotenv');
 
+// Route files
+const notes = require('./routes/notes');
+
 // load environment variable
-env.config({ path: './config/config.env' });
+env.config({ path: './src/config/.env' });
 
 const app = express();
+app.use('/api/v1/notes', notes);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(
