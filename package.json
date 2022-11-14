@@ -1,0 +1,27 @@
+{
+  "name": "denki",
+  "version": "0.0.1",
+  "description": "Backend api for open note",
+  "main": "server.js",
+  "author": "Ian Maulana",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node server",
+    "dev": "nodemon server",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "prepare": "husky install"
+  }
+}
