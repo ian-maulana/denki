@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 
 // route files
 const notes = require('./routes/notes');
+const users = require('./routes/users');
 
 // load environment variable
 env.config({ path: './src/config/.env' });
@@ -17,6 +18,8 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+
 // logging middleware
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -24,6 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // mount routers
 app.use('/api/v1/notes', notes);
+app.use('/api/v1/users', users);
 
 const PORT = process.env.PORT || 5000;
 
