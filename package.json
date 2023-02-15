@@ -26,5 +26,13 @@
     "format:fix": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "prepare": "husky install"
+  },
+  "imports": {
+    "#middleware/*": "./src/middleware/*.js",
+    "#config/*": "./src/config/*.js",
+    "#controllers/*": "./src/controllers/*.js",
+    "#models/*": "./src/models/*.js",
+    "#routes/*": "./src/routes/*.js",
+    "#utils/*": "./src/utils/*.js"
   }
 }

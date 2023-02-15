@@ -3,15 +3,18 @@ const env = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 
+// middleware
+const errorParser = require('#middleware/error_parser');
+
 // db driver
-const connectDB = require('./config/db');
+const connectDB = require('#config/db');
 
 // route files
-const notes = require('./routes/notes');
-const users = require('./routes/users');
+// const notes = require('./routes/notes');
+const userRoute = require('#routes/user_route');
 
 // load environment variable
-env.config({ path: './src/config/.env' });
+env.config({ path: '.env' });
 
 // connect to database
 connectDB();
@@ -26,8 +29,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // mount routers
-app.use('/api/v1/notes', notes);
-app.use('/api/v1/users', users);
+// app.use('/api/v1/notes', notes);
+app.use('/api/v1/user', userRoute);
+
+app.use(errorParser);
 
 const PORT = process.env.PORT || 5000;
 
