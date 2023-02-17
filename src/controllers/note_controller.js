@@ -6,9 +6,9 @@ const { ApiCode: ResponseCode } = require('#utils/constant');
  * @acces Private
  */
 exports.getNotes = (req, res) => {
-  res
+  return res
     .status(ResponseCode.SUCCESS)
-    .json({ success: true, msg: 'Show all notes' });
+    .json({ success: true, msg: req.t('showAllNotes') });
 };
 
 /**

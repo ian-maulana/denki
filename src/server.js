@@ -2,6 +2,21 @@ const express = require('express');
 const env = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const i18next = require('i18next');
+const i18nextNodeFs = require('i18next-node-fs-backend');
+const i18nextMiddleware = require('i18next-http-middleware');
+
+i18next
+  .use(i18nextMiddleware.LanguageDetector)
+  .use(i18nextNodeFs)
+  .init({
+    lng: 'en',
+    fallbackLng: 'en',
+    backend: { loadPath: 'public/i18n/{{lng}}/{{ns}}.json' },
+    preload: ['en', 'id'],
+    defaultNS: 'locale',
+    ns: ['locale'],
+  });
 
 // middleware
 const errorParser = require('#middleware/error_parser');
@@ -10,8 +25,10 @@ const errorParser = require('#middleware/error_parser');
 const connectDB = require('#config/db');
 
 // route files
-// const notes = require('./routes/notes');
+const notes = require('#routes/note_route');
 const userRoute = require('#routes/user_route');
+
+const app = express();
 
 // load environment variable
 env.config({ path: '.env' });
@@ -19,7 +36,7 @@ env.config({ path: '.env' });
 // connect to database
 connectDB();
 
-const app = express();
+app.use(i18nextMiddleware.handle(i18next));
 
 app.use(express.json());
 
@@ -29,7 +46,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // mount routers
-// app.use('/api/v1/notes', notes);
+app.use('/api/v1/notes', notes);
 app.use('/api/v1/user', userRoute);
 
 app.use(errorParser);
