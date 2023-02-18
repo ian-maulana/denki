@@ -1,7 +1,7 @@
-const { ApiStatus } = require('./constant');
+const { ResponseStatus } = require('./constant');
 
 class ResponseUtil extends Error {
-  constructor(message, statusCode, responseCode = ApiStatus.FAILURE) {
+  constructor(message, statusCode, responseCode = ResponseStatus.FAILURE) {
     super(message);
     this.statusCode = statusCode;
     this.responseCode = responseCode;
@@ -16,8 +16,12 @@ class ResponseUtil extends Error {
    * @param string status Response status code
    */
 
-  static create(message = 'Success', data = null, status = this.responseCode) {
-    return { status, data, message };
+  static parse(status, data, message) {
+    return {
+      status: status ?? this.statusCode,
+      data: data ?? null,
+      message: message ?? this.message,
+    };
   }
 }
 

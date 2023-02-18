@@ -2,7 +2,7 @@ const asyncCatch = require('#middleware/async_catch');
 
 const UserModel = require('#models/user_model');
 const ResponseUtil = require('#utils/response_util');
-const { ApiCode, ApiStatus, ApiMessage } = require('#utils/constant');
+const { ResponseCode, ResponseStatus } = require('#utils/constant');
 
 /**
  * @desc Fetch all users
@@ -12,8 +12,8 @@ const { ApiCode, ApiStatus, ApiMessage } = require('#utils/constant');
 exports.getUsers = asyncCatch(async (_req, res) => {
   const users = await UserModel.find();
   res
-    .status(ApiCode.SUCCESS)
-    .json(ResponseUtil.create(ApiMessage.SUCCESS, users, ApiStatus.SUCCESS));
+    .status(ResponseCode.SUCCESS)
+    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, users));
 });
 
 /**
@@ -25,8 +25,8 @@ exports.getUser = asyncCatch(async (req, res) => {
   const user = await UserModel.findById(req.params.id);
 
   res
-    .status(ApiCode.SUCCESS)
-    .json(ResponseUtil.create(ApiMessage.SUCCESS, user, ApiStatus.SUCCESS));
+    .status(ResponseCode.SUCCESS)
+    .json(ResponseUtil.parseResponseStatus.SUCCESS(user));
 });
 
 /**
@@ -44,8 +44,8 @@ exports.createUser = asyncCatch(async (req, res) => {
   });
 
   res
-    .status(ApiCode.CREATED)
-    .json(ResponseUtil.create(ApiMessage.SUCCESS, user, ApiStatus.SUCCESS));
+    .status(ResponseCode.CREATED)
+    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, user));
 });
 
 /**
@@ -68,8 +68,8 @@ exports.updateUser = asyncCatch(async (req, res) => {
   });
 
   res
-    .status(ApiCode.SUCCESS)
-    .json(ResponseUtil.create(ApiMessage.SUCCESS, user, ApiStatus.SUCCESS));
+    .status(ResponseCode.SUCCESS)
+    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, user));
 });
 
 /**
@@ -82,6 +82,6 @@ exports.deleteUser = asyncCatch(async (req, res) => {
   const user = await UserModel.findByIdAndRemove(id);
 
   res
-    .status(ApiCode.ACCEPTED)
-    .json(ResponseUtil.create(ApiMessage.SUCCESS, user, ApiStatus.SUCCESS));
+    .status(ResponseCode.ACCEPTED)
+    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, user));
 });

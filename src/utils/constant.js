@@ -1,4 +1,4 @@
-class ApiCode {
+class ResponseCode {
   static SUCCESS = 200;
   static CREATED = 201;
   static ACCEPTED = 202;
@@ -16,32 +16,32 @@ class ApiCode {
   static NO_INTERNET_CONNECTION = -7;
 }
 
-class ApiMessage {
-  static SUCCESS = 'Success';
-  static CREATED = 'Success with no content';
-  static BAD_REQUEST = 'Bad request, try again later';
-  static FORBIDDEN = 'Forbidden request, try again later';
-  static UNAUTHORISED = 'User is unauthorised, try again later';
-  static NOT_FOUND = 'URL is not found, try again later';
-  static DATA_NOT_FOUND = 'Data not found!';
-  static INTERNAL_SERVER_ERROR = 'Something wrong, try again later';
+class ResponseMessage {
+  static SUCCESS = 'success';
+  static CREATED = 'success';
+  static BAD_REQUEST = 'created';
+  static FORBIDDEN = 'forbidden';
+  static UNAUTHORISED = 'unauthorised';
+  static NOT_FOUND = 'not_found';
+  static DATA_NOT_FOUND = 'data_not_found';
+  static INTERNAL_SERVER_ERROR = 'internal_server_error';
 
-  static DEFAULT = 'Something wrong, try again later';
-  static CONNECT_TIMEOUT = 'Connection timeout, try again later';
-  static CANCEL = 'Request was cancelled, try again later';
-  static RECEIVE_TIMEOUT = 'Time out error, try again later';
-  static SEND_TIMEOUT = 'Time out error, try again later';
-  static CACHE_ERROR = 'Cache error, try again later';
-  static NO_INTERNET_CONNECTION = 'Please check your internet connection';
+  static DEFAULT = 'default';
+  static CONNECT_TIMEOUT = 'connect_timeout';
+  static CANCEL = 'cancel';
+  static RECEIVE_TIMEOUT = 'receive_timeout';
+  static SEND_TIMEOUT = 'send_timeout';
+  static CACHE_ERROR = 'cache_error';
+  static NO_INTERNET_CONNECTION = 'no_internet_connection';
 }
 
-class ApiStatus {
+class ResponseStatus {
   static FAILURE = '0000';
   static SUCCESS = '0001';
 }
 
 module.exports = {
-  ApiStatus,
-  ApiMessage,
-  ApiCode,
+  ResponseStatus,
+  ResponseMessage,
+  ResponseCode,
 };
