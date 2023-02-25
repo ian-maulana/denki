@@ -1,11 +1,10 @@
 {
-  "show_all_notes": "Show all notes",
   "success": "Success",
   "created": "Success with no content",
-  "bad_request": "Bad request, try again later",
-  "forbidden": "Forbidden request, try again later",
-  "unauthorised": "User is unauthorised, try again later",
-  "not_found": "URL is not found, try again later",
+  "bad_request": "Bad request",
+  "forbidden": "Forbidden",
+  "unauthorised": "Unauthorised",
+  "not_found": "Resource is not found",
   "data_not_found": "Data not found!",
   "internal_server_error": "Something wrong, try again later",
   "default": "Something wrong, try again later",
@@ -14,5 +13,6 @@
   "receive_timeout": "Time out error, try again later",
   "send_timeout": "Time out error, try again later",
   "cache_error": "Cache error, try again later",
-  "no_internet_connection": "Please check your internet connection"
+  "no_internet_connection": "Please check your internet connection",
+  "duplicate_entry": "Duplicate field value entered"
 }

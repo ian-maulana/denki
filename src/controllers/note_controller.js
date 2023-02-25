@@ -1,4 +1,4 @@
-const { ApiCode: ResponseCode } = require('#utils/constant');
+const { ResponseCode } = require('#utils/constant');
 
 /**
  * @desc Fetch all notes
@@ -8,7 +8,7 @@ const { ApiCode: ResponseCode } = require('#utils/constant');
 exports.getNotes = (req, res) => {
   return res
     .status(ResponseCode.SUCCESS)
-    .json({ success: true, msg: req.t('showAllNotes') });
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -19,7 +19,7 @@ exports.getNotes = (req, res) => {
 exports.getNote = (req, res) => {
   res
     .status(ResponseCode.SUCCESS)
-    .json({ success: true, msg: `Show note with ${req.params.id}` });
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -30,7 +30,7 @@ exports.getNote = (req, res) => {
 exports.createNote = (req, res) => {
   res
     .status(ResponseCode.SUCCESS)
-    .json({ success: true, msg: 'Create new note' });
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -41,7 +41,7 @@ exports.createNote = (req, res) => {
 exports.updateNote = (req, res) => {
   res
     .status(ResponseCode.SUCCESS)
-    .json({ success: true, msg: `Update note with ${req.params.id}` });
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -52,5 +52,5 @@ exports.updateNote = (req, res) => {
 exports.deleteNote = (req, res) => {
   res
     .status(ResponseCode.SUCCESS)
-    .json({ success: true, msg: `Delete note with ${req.params.id}` });
+    .json({ success: true, msg: req.t('success') });
 };

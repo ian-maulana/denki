@@ -19,7 +19,7 @@ i18next
   });
 
 // middleware
-const errorParser = require('#middleware/error_parser');
+const errorParser = require('#middleware/error_response');
 
 // db driver
 const connectDB = require('#config/db');

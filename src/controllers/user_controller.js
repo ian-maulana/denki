@@ -2,23 +2,31 @@ const asyncCatch = require('#middleware/async_catch');
 
 const UserModel = require('#models/user_model');
 const ResponseUtil = require('#utils/response_util');
-const { ResponseCode, ResponseStatus } = require('#utils/constant');
+const {
+  ResponseCode,
+  ResponseStatus,
+  ResponseMessage,
+} = require('#utils/constant');
+
+const { SUCCESS: successCode } = ResponseStatus;
+const { SUCCESS: successMessage } = ResponseMessage;
 
 /**
  * @desc Fetch all users
- * @route GET /api/v1/users
+ * @route GET /api/v1/user
  * @access Private
  */
-exports.getUsers = asyncCatch(async (_req, res) => {
-  const users = await UserModel.find();
+exports.getUsers = asyncCatch(async (req, res) => {
+  const users = await UserModel.findById(req.params.id);
+
   res
     .status(ResponseCode.SUCCESS)
-    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, users));
+    .json(ResponseUtil.parse(successCode, users, req.t(successMessage)));
 });
 
 /**
  * @desc Fetch user by id
- * @route GET /api/v1/users/:id
+ * @route GET /api/v1/user/:id
  * @access Private
  */
 exports.getUser = asyncCatch(async (req, res) => {
@@ -26,12 +34,12 @@ exports.getUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.SUCCESS)
-    .json(ResponseUtil.parseResponseStatus.SUCCESS(user));
+    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
 });
 
 /**
  * @desc Create new user
- * @route POST /api/v1/users
+ * @route POST /api/v1/user
  * @access Private
  */
 exports.createUser = asyncCatch(async (req, res) => {
@@ -45,31 +53,27 @@ exports.createUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.CREATED)
-    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, user));
+    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
 });
 
 /**
  * @desc Update user by id
- * @route PUT /api/v1/users/:id
+ * @route PUT /api/v1/user/:id
  * @access Private
  */
 exports.updateUser = asyncCatch(async (req, res) => {
   const id = req.params.id;
   const { name, email } = req.body;
 
-  const newUser = {
-    name: name,
-    email: email,
-  };
-
-  const user = await UserModel.findByIdAndUpdate(id, newUser, {
+  const body = { name, email };
+  const user = await UserModel.findByIdAndUpdate(id, body, {
     new: true,
     runValidators: true,
   });
 
   res
     .status(ResponseCode.SUCCESS)
-    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, user));
+    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
 });
 
 /**
@@ -83,5 +87,5 @@ exports.deleteUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.ACCEPTED)
-    .json(ResponseUtil.parse(ResponseStatus.SUCCESS, user));
+    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
 });
