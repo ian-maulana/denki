@@ -17,7 +17,7 @@ const { SUCCESS: successMessage } = ResponseMessage;
  * @access Private
  */
 exports.getUsers = asyncCatch(async (req, res) => {
-  const users = await UserModel.findById(req.params.id);
+  const users = await UserModel.find();
 
   res
     .status(ResponseCode.SUCCESS)
