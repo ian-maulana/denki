@@ -14,8 +14,9 @@ const {
  */
 exports.register = asyncCatch(async (req, res) => {
   const user = await UserModel.create(req.body);
+  const { password: _, ...userdata } = user._doc;
 
   res
     .status(ResponseCode.ACCEPTED)
-    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
+    .defaultResponse(userdata, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });

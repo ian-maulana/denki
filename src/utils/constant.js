@@ -33,7 +33,6 @@ class ResponseMessage {
   static SEND_TIMEOUT = 'send_timeout';
   static CACHE_ERROR = 'cache_error';
   static NO_INTERNET_CONNECTION = 'no_internet_connection';
-
   static DUPLICATE_ENTRY = 'duplicate_entry';
 }
 

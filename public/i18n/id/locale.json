@@ -17,5 +17,6 @@
   "email_required": "Email harus diisi.",
   "email_not_valid": "Email tidak valid.",
   "password_required": "Password harus diisi.",
-  "name_required": "Nama harus diisi."
+  "name_required": "Nama harus diisi.",
+  "duplicate_entry": "Duplikasi data"
 }

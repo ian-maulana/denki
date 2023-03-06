@@ -15,6 +15,13 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-console": "error",
-    "no-unused-vars": ["error", { "argsIgnorePattern": "_" }]
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_",
+        "varsIgnorePattern": "_",
+        "caughtErrorsIgnorePattern": "_"
+      }
+    ]
   }
 }
