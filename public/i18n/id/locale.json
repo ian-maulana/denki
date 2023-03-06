@@ -13,5 +13,9 @@
   "receive_timeout": "Tenggat waktu habis, coba lagi nanti",
   "send_timeout": "Tenggat waktu habis, coba lagi nanti",
   "cache_error": "Kesalahan tembolok, coba lagi nanti",
-  "no_internet_connection": "Silakan periksa koneksi internet Anda"
+  "no_internet_connection": "Silakan periksa koneksi internet Anda",
+  "email_required": "Email harus diisi.",
+  "email_not_valid": "Email tidak valid.",
+  "password_required": "Password harus diisi.",
+  "name_required": "Nama harus diisi."
 }

@@ -1,27 +1,34 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const UserSchema = mongoose.Schema(
   {
     email: {
       type: String,
-      required: [true, 'Email is required'],
+      required: [true, 'email_required'],
       unique: true,
-      match: [
-        // eslint-disable-next-line no-useless-escape
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        'Email is not valid',
-      ],
+      match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'email_not_valid'],
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      required: [true, 'password_required'],
+      minlength: 6,
+      select: false,
     },
     name: {
       type: String,
-      required: [true, 'Name is required'],
+      required: [true, 'name_required'],
     },
   },
   { timestamps: true },
 );
+
+// Encrypt password using bcrypt
+UserSchema.pre('save', async function (next) {
+  const salt = await bcrypt.getSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+
+  next();
+});
 
 module.exports = mongoose.model('User', UserSchema);

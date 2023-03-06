@@ -19,14 +19,16 @@ i18next
   });
 
 // middleware
-const errorParser = require('#middleware/error_response');
+const errorParser = require('#middleware/error_parser');
+const serializeResponse = require('#middleware/serialize_response');
 
 // db driver
 const connectDB = require('#config/db');
 
 // route files
-const notes = require('#routes/note_route');
+const noteRoute = require('#routes/note_route');
 const userRoute = require('#routes/user_route');
+const onboardRoute = require('#routes/onboard_route');
 
 const app = express();
 
@@ -39,6 +41,7 @@ connectDB();
 app.use(i18nextMiddleware.handle(i18next));
 
 app.use(express.json());
+app.use(serializeResponse);
 
 // logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -46,8 +49,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // mount routers
-app.use('/api/v1/notes', notes);
+app.use('/api/v1/note', noteRoute);
 app.use('/api/v1/user', userRoute);
+app.use('/api/v1/onboard', onboardRoute);
 
 app.use(errorParser);
 

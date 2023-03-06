@@ -1,7 +1,11 @@
 const ResponseUtil = require('#utils/response_util');
-const { ResponseCode, ResponseMessage } = require('#utils/constant');
+const {
+  ResponseCode,
+  ResponseMessage,
+  ResponseStatus,
+} = require('#utils/constant');
 
-const errorResponse = (err, req, res, _next) => {
+const errorParser = (err, _req, res, _next) => {
   // eslint-disable-next-line no-console
   console.log(err.message.red);
 
@@ -27,10 +31,14 @@ const errorResponse = (err, req, res, _next) => {
     statusCode = ResponseCode.BAD_REQUEST;
   }
 
-  err = new ResponseUtil(message, ResponseCode.BAD_REQUEST);
+  err = new ResponseUtil(message, statusCode);
   res
     .status(statusCode)
-    .json(ResponseUtil.parse(err.responseCode, null, req.t(err.message)));
+    .defaultResponse(null, ResponseStatus.FAILURE, err.message);
+
+  // res
+  //   .status(statusCode)
+  //   .json(ResponseUtil.parse(err.responseCode, null, req.t(err.message)));
 };
 
-module.exports = errorResponse;
+module.exports = errorParser;

@@ -1,15 +1,11 @@
 const asyncCatch = require('#middleware/async_catch');
 
 const UserModel = require('#models/user_model');
-const ResponseUtil = require('#utils/response_util');
 const {
   ResponseCode,
   ResponseStatus,
   ResponseMessage,
 } = require('#utils/constant');
-
-const { SUCCESS: successCode } = ResponseStatus;
-const { SUCCESS: successMessage } = ResponseMessage;
 
 /**
  * @desc Fetch all users
@@ -30,7 +26,7 @@ exports.getUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.SUCCESS)
-    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });
 
 /**
@@ -49,7 +45,7 @@ exports.createUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.CREATED)
-    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });
 
 /**
@@ -69,12 +65,12 @@ exports.updateUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.SUCCESS)
-    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });
 
 /**
  * @desc Delete user by id
- * @route DELETE /api/v1/users/:id
+ * @route DELETE /api/v1/user/:id
  * @access Private
  */
 exports.deleteUser = asyncCatch(async (req, res) => {
@@ -83,5 +79,5 @@ exports.deleteUser = asyncCatch(async (req, res) => {
 
   res
     .status(ResponseCode.ACCEPTED)
-    .json(ResponseUtil.parse(successCode, user, req.t(successMessage)));
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });

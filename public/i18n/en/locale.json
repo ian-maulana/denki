@@ -14,5 +14,9 @@
   "send_timeout": "Time out error, try again later",
   "cache_error": "Cache error, try again later",
   "no_internet_connection": "Please check your internet connection",
-  "duplicate_entry": "Duplicate field value entered"
+  "duplicate_entry": "Duplicate field value entered",
+  "email_required": "Email is required.",
+  "email_not_valid": "Email not valid.",
+  "password_required": "Password is required.",
+  "name_required": "Name is required."
 }
