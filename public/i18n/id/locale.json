@@ -1,4 +1,5 @@
 {
+  "not_authorized_access": "Tidak ada izin untuk mengakses rute ini.",
   "success": "Berhasil",
   "created": "Berhasil tanpa isi",
   "bad_request": "Permintaan tidak valid",

@@ -1,4 +1,5 @@
 {
+  "not_authorized": "Not authorized to access this route",
   "success": "Success",
   "created": "Success with no content",
   "bad_request": "Bad request",

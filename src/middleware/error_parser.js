@@ -10,7 +10,7 @@ const errorParser = (err, _req, res, _next) => {
   console.log(err.message.red);
 
   // Define default message
-  let message = ResponseMessage.DEFAULT;
+  let message = err.message ?? ResponseMessage.DEFAULT;
   let statusCode = err.statusCode ?? ResponseCode.INTERNAL_SERVER_ERROR;
 
   // Error not found
@@ -35,10 +35,6 @@ const errorParser = (err, _req, res, _next) => {
   res
     .status(statusCode)
     .defaultResponse(null, ResponseStatus.FAILURE, err.message);
-
-  // res
-  //   .status(statusCode)
-  //   .json(ResponseUtil.parse(err.responseCode, null, req.t(err.message)));
 };
 
 module.exports = errorParser;
