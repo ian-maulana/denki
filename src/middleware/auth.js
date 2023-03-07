@@ -7,11 +7,12 @@ const { ResponseCode, ResponseStatus } = require('#utils/constant');
 // Protect routes
 exports.protect = asyncCatch(async (req, _res, next) => {
   let token;
-  const { authorization } = req.headers;
 
-  if (authorization && authorization.startsWith('Bearer')) {
-    // Set token from Bearer token in header
-    token = req.headers.authorization.split(' ')[1];
+  if (req.headers.authorization) {
+    if (req.headers.authorization.startsWith('Bearer')) {
+      // Set token from Bearer token in header
+      token = req.headers.authorization.split(' ')[1];
+    }
   }
 
   // Make sure token exists

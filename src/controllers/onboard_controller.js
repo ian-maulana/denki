@@ -18,7 +18,7 @@ exports.register = asyncCatch(async (req, res) => {
   const { password: _, ...userdata } = user._doc;
 
   res
-    .status(ResponseCode.ACCEPTED)
+    .status(ResponseCode.SUCCESS)
     .defaultResponse(userdata, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });
 
@@ -40,7 +40,7 @@ exports.login = asyncCatch(async (req, res, next) => {
   const user = await UserModel.findOne({ email }).select('+password');
 
   if (!user) {
-    next(
+    return next(
       new ResponseUtil(ResponseMessage.UNAUTHORISED, ResponseCode.UNAUTHORISED),
     );
   }
@@ -49,7 +49,7 @@ exports.login = asyncCatch(async (req, res, next) => {
   const match = await user.matchPassword(password);
 
   if (!match) {
-    next(
+    return next(
       new ResponseUtil(ResponseMessage.UNAUTHORISED, ResponseCode.UNAUTHORISED),
     );
   }
@@ -61,6 +61,19 @@ exports.login = asyncCatch(async (req, res, next) => {
   const userdata = { ...data, token };
 
   res
-    .status(ResponseCode.ACCEPTED)
+    .status(ResponseCode.SUCCESS)
     .defaultResponse(userdata, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
+});
+
+/**
+ * @desc Get Me
+ * @route GET /api/v1/onboard/me
+ * @access Private
+ */
+exports.getMe = asyncCatch(async (req, res) => {
+  const user = req.user;
+
+  res
+    .status(ResponseCode.SUCCESS)
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });

@@ -26,9 +26,9 @@ const serializeResponse = require('#middleware/serialize_response');
 const connectDB = require('#config/db');
 
 // route files
+const onboardRoute = require('#routes/onboard_route');
 const noteRoute = require('#routes/note_route');
 const userRoute = require('#routes/user_route');
-const onboardRoute = require('#routes/onboard_route');
 
 const app = express();
 

@@ -1,9 +1,11 @@
 const express = require('express');
-const { register, login } = require('#controllers/onboard_controller');
+const { protect } = require('#middleware/auth');
+const { register, login, getMe } = require('#controllers/onboard_controller');
 
-const router = express.Router({ mergeParams: true });
+const router = express.Router();
 
-router.route('/register').post(register);
-router.route('/login').post(login);
+router.post('/login', login);
+router.post('/register', register);
+router.get('/me', protect, getMe);
 
 module.exports = router;
