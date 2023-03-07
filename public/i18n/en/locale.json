@@ -3,7 +3,7 @@
   "created": "Success with no content",
   "bad_request": "Bad request",
   "forbidden": "Forbidden",
-  "unauthorised": "Unauthorised",
+  "unauthorised": "Invalid credentials",
   "not_found": "Resource is not found",
   "data_not_found": "Data not found!",
   "internal_server_error": "Something wrong, try again later",
