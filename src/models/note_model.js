@@ -6,9 +6,14 @@ const NoteSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    slug: String,
+    body: {
       type: String,
       required: true,
+    },
+    pubdate: {
+      type: Date,
+      default: Date.now,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
