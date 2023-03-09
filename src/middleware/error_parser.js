@@ -32,6 +32,7 @@ const errorParser = (err, _req, res, _next) => {
   }
 
   err = new ResponseUtil(message, statusCode);
+
   res
     .status(statusCode)
     .defaultResponse(null, ResponseStatus.FAILURE, err.message);

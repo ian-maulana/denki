@@ -32,7 +32,7 @@ exports.login = asyncCatch(async (req, res, next) => {
 
   if (!email || !password) {
     return next(
-      new ResponseUtil(ResponseMessage.BAD_REQUEST, ResponseCode.BAD_REQUEST),
+      new ResponseUtil(ResponseMessage.UNAUTHORISED, ResponseCode.BAD_REQUEST),
     );
   }
 

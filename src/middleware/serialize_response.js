@@ -6,7 +6,7 @@ const serializeResponse = async (req, res, next) => {
    * @param {string} message
    */
   res.defaultResponse = function (data, status, message) {
-    res.json.call(this, { data, status, message: req.t(message) });
+    res.json.call(this, { data, status, message: req.t(message, message) });
   };
 
   next();
