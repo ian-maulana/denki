@@ -1,10 +1,14 @@
+const { ResponseCode } = require('#utils/constant');
+
 /**
  * @desc Fetch all notes
  * @route GET /api/v1/notes
  * @acces Private
  */
 exports.getNotes = (req, res) => {
-  res.status(200).json({ success: true, msg: 'Show all notes' });
+  return res
+    .status(ResponseCode.SUCCESS)
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -14,8 +18,8 @@ exports.getNotes = (req, res) => {
  */
 exports.getNote = (req, res) => {
   res
-    .status(200)
-    .json({ success: true, msg: `Show note with ${req.params.id}` });
+    .status(ResponseCode.SUCCESS)
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -24,7 +28,9 @@ exports.getNote = (req, res) => {
  * @acces Private
  */
 exports.createNote = (req, res) => {
-  res.status(200).json({ success: true, msg: 'Create new note' });
+  res
+    .status(ResponseCode.SUCCESS)
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -34,8 +40,8 @@ exports.createNote = (req, res) => {
  */
 exports.updateNote = (req, res) => {
   res
-    .status(200)
-    .json({ success: true, msg: `Update note with ${req.params.id}` });
+    .status(ResponseCode.SUCCESS)
+    .json({ success: true, msg: req.t('success') });
 };
 
 /**
@@ -45,6 +51,6 @@ exports.updateNote = (req, res) => {
  */
 exports.deleteNote = (req, res) => {
   res
-    .status(200)
-    .json({ success: true, msg: `Delete note with ${req.params.id}` });
+    .status(ResponseCode.SUCCESS)
+    .json({ success: true, msg: req.t('success') });
 };

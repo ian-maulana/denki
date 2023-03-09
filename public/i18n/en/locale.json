@@ -1,0 +1,23 @@
+{
+  "not_authorized": "Not authorized to access this route",
+  "success": "Success",
+  "created": "Success with no content",
+  "bad_request": "Bad request",
+  "forbidden": "Forbidden",
+  "unauthorised": "Invalid credentials",
+  "not_found": "Resource is not found",
+  "data_not_found": "Data not found!",
+  "internal_server_error": "Something wrong, try again later",
+  "default": "Something wrong, try again later",
+  "connect_timeout": "Connection timeout, try again later",
+  "cancel": "Request was cancelled, try again later",
+  "receive_timeout": "Time out error, try again later",
+  "send_timeout": "Time out error, try again later",
+  "cache_error": "Cache error, try again later",
+  "no_internet_connection": "Please check your internet connection",
+  "duplicate_entry": "Duplicate field value entered",
+  "email_required": "Email is required.",
+  "email_not_valid": "Email not valid.",
+  "password_required": "Password is required.",
+  "name_required": "Name is required."
+}

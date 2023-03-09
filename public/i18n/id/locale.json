@@ -1,0 +1,23 @@
+{
+  "not_authorized_access": "Tidak ada izin untuk mengakses rute ini.",
+  "success": "Berhasil",
+  "created": "Berhasil tanpa isi",
+  "bad_request": "Permintaan tidak valid",
+  "forbidden": "Akses ditolak",
+  "unauthorized": "Kredensial tidak valid",
+  "not_found": "Resource tidak ditemukan",
+  "data_not_found": "Data tidak ditemukan!",
+  "internal_server_error": "Terjadi masalah, coba lagi nanti",
+  "default": "Terjadi masalah, coba lagi nanti",
+  "connect_timeout": "Waktu habis koneksi, coba lagi nanti",
+  "cancel": "Permintaan dibatalkan, coba lagi nanti",
+  "receive_timeout": "Tenggat waktu habis, coba lagi nanti",
+  "send_timeout": "Tenggat waktu habis, coba lagi nanti",
+  "cache_error": "Kesalahan tembolok, coba lagi nanti",
+  "no_internet_connection": "Silakan periksa koneksi internet Anda",
+  "email_required": "Email harus diisi.",
+  "email_not_valid": "Email tidak valid.",
+  "password_required": "Password harus diisi.",
+  "name_required": "Nama harus diisi.",
+  "duplicate_entry": "Duplikasi data"
+}
