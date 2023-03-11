@@ -27,6 +27,7 @@ const UserSchema = mongoose.Schema(
     timestamps: true,
     toJSON: {
       versionKey: false,
+      hide: 'password',
       transform: function (doc, ret) {
         ret.id = ret._id;
         delete ret._id;

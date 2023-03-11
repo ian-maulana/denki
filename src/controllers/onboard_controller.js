@@ -15,11 +15,11 @@ const {
  */
 exports.register = asyncCatch(async (req, res) => {
   const user = await UserModel.create(req.body);
-  const { password: _, ...userdata } = user._doc;
+  delete user._doc.password;
 
   res
     .status(ResponseCode.SUCCESS)
-    .defaultResponse(userdata, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });
 
 /**
@@ -56,13 +56,12 @@ exports.login = asyncCatch(async (req, res, next) => {
 
   // Create token
   const token = await user.getSignedJwtToken();
-
-  const { password: _, ...data } = user._doc;
-  const userdata = { ...data, token };
+  delete user._doc.password;
+  user._doc.token = token;
 
   res
     .status(ResponseCode.SUCCESS)
-    .defaultResponse(userdata, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
 });
 
 /**

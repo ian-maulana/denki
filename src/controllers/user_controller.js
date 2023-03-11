@@ -46,6 +46,7 @@ exports.getUser = asyncCatch(async (req, res, next) => {
  */
 exports.createUser = asyncCatch(async (req, res) => {
   const user = await UserModel.create(req.body);
+  delete user._doc.password;
 
   res
     .status(ResponseCode.CREATED)
@@ -59,11 +60,43 @@ exports.createUser = asyncCatch(async (req, res) => {
  */
 exports.updateUser = asyncCatch(async (req, res) => {
   const id = req.params.id;
+  const payload = {
+    name: req.body.name,
+    email: req.body.email,
+  };
 
-  const user = await UserModel.findByIdAndUpdate(id, req.body, {
+  const user = await UserModel.findByIdAndUpdate(id, payload, {
     new: true,
     runValidators: true,
   });
+
+  res
+    .status(ResponseCode.SUCCESS)
+    .defaultResponse(user, ResponseStatus.SUCCESS, ResponseMessage.SUCCESS);
+});
+
+/**
+ * @desc Change Password
+ * @route PUT /api/v1/user/change-password
+ * @access Private
+ */
+exports.changePassword = asyncCatch(async (req, res, next) => {
+  const user = await UserModel.findById(req.user.id).select('+password');
+
+  // Check current password
+  if (!(await user.matchPassword(req.body.currentPassword))) {
+    return next(
+      new ResponseUtil(
+        ResponseMessage.UNAUTHORISED,
+        ResponseCode.UNAUTHORISED,
+        ResponseStatus.FAILURE,
+      ),
+    );
+  }
+
+  user.password = req.body.newPassword;
+  await user.save();
+  delete user._doc.password;
 
   res
     .status(ResponseCode.SUCCESS)
