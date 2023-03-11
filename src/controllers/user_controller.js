@@ -1,5 +1,5 @@
 const asyncCatch = require('#middleware/async_catch');
-
+const ResponseUtil = require('#utils/response_util');
 const UserModel = require('#models/user_model');
 const {
   ResponseCode,
@@ -12,7 +12,7 @@ const {
  * @route GET /api/v1/user
  * @access Private
  */
-exports.getUsers = asyncCatch(async (req, res) => {
+exports.getUsers = asyncCatch(async (_req, res) => {
   res.status(ResponseCode.SUCCESS).json(res.advancedResult);
 });
 
@@ -21,8 +21,18 @@ exports.getUsers = asyncCatch(async (req, res) => {
  * @route GET /api/v1/user/:id
  * @access Private
  */
-exports.getUser = asyncCatch(async (req, res) => {
+exports.getUser = asyncCatch(async (req, res, next) => {
   const user = await UserModel.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ResponseUtil(
+        ResponseMessage.DATA_NOT_FOUND,
+        ResponseCode.NOT_FOUND,
+        ResponseStatus.FAILURE,
+      ),
+    );
+  }
 
   res
     .status(ResponseCode.SUCCESS)
@@ -35,13 +45,7 @@ exports.getUser = asyncCatch(async (req, res) => {
  * @access Private
  */
 exports.createUser = asyncCatch(async (req, res) => {
-  const { name, email, password } = req.body;
-
-  const user = await UserModel.create({
-    email: email,
-    password: password,
-    name: name,
-  });
+  const user = await UserModel.create(req.body);
 
   res
     .status(ResponseCode.CREATED)
@@ -55,10 +59,8 @@ exports.createUser = asyncCatch(async (req, res) => {
  */
 exports.updateUser = asyncCatch(async (req, res) => {
   const id = req.params.id;
-  const { name, email } = req.body;
 
-  const body = { name, email };
-  const user = await UserModel.findByIdAndUpdate(id, body, {
+  const user = await UserModel.findByIdAndUpdate(id, req.body, {
     new: true,
     runValidators: true,
   });
@@ -73,9 +75,19 @@ exports.updateUser = asyncCatch(async (req, res) => {
  * @route DELETE /api/v1/user/:id
  * @access Private
  */
-exports.deleteUser = asyncCatch(async (req, res) => {
+exports.deleteUser = asyncCatch(async (req, res, next) => {
   const id = req.params.id;
   const user = await UserModel.findByIdAndRemove(id);
+
+  if (!user) {
+    return next(
+      new ResponseUtil(
+        ResponseMessage.DATA_NOT_FOUND,
+        ResponseCode.NOT_FOUND,
+        ResponseStatus.FAILURE,
+      ),
+    );
+  }
 
   res
     .status(ResponseCode.ACCEPTED)

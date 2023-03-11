@@ -23,7 +23,16 @@ const UserSchema = mongoose.Schema(
       required: [true, 'name_required'],
     },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+    toJSON: {
+      versionKey: false,
+      transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+      },
+    },
+  },
 );
 
 // Encrypt password using bcrypt
@@ -31,6 +40,12 @@ UserSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 
+  next();
+});
+
+// Cascade delete note when a user is deleted
+UserSchema.pre('remove', async function (next) {
+  await this.model('Note').deleteMay({ user: this.id });
   next();
 });
 
